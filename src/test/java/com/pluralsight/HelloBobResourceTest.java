@@ -1,23 +1,22 @@
 package com.pluralsight;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.Response;
-
 import org.glassfish.grizzly.http.server.HttpServer;
-
-import org.glassfish.grizzly.http.util.HttpStatus;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertEquals;
 
-public class MyResourceTest {
+/**
+ * Created by ianwells on 30/11/2016.
+ */
+public class HelloBobResourceTest {
 
     private HttpServer server;
     private WebTarget target;
@@ -43,18 +42,9 @@ public class MyResourceTest {
         server.stop();
     }
 
-    /**
-     * Test to see that the message "Got it!" is sent in the response.
-     */
     @Test
-    public void testGetIt() {
-        String responseMsg = target.path("myresource").request().get(String.class);
-        assertEquals("Got it!", responseMsg);
-    }
-
-    @Test
-    public void givenPathToNonExistentReseourceThenShouldReturnNotFoundErrorHTTPError() {
-        Response result = target.path("nonexistentresource").request().get();
-        Assert.assertThat(result.getStatus(), is(equalTo(HttpStatus.NOT_FOUND_404.getStatusCode())));
+    public void givenFirstCustomMessageNeededThenShouldReturnHelloBob() {
+        String result = target.path("hellobobresource").request().get(String.class);
+        Assert.assertThat(result, is(equalTo("Hello Bob...")));
     }
 }
