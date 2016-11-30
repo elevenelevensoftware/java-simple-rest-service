@@ -34,11 +34,11 @@ public class BookDao {
         books.put(secondBook.getId(), secondBook);
     }
 
-    Collection<Book> getBooks() {
+    public Collection<Book> getBooks() {
         return (books.values());
     }
 
-    Book getBook(String id) {
+    public Book getBook(String id) {
         return (books.get(id));
     }
 }

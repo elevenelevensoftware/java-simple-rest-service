@@ -47,8 +47,14 @@ public class BooksResourceTest {
 
     @Test
     public void givenBooksResourceNeededThenShouldBeFound() {
-        Response response = target.path("/books").request().get();
+        Response response = target.path("books").request().get();
         Assert.assertThat(response.getStatus(), is(equalTo(HttpStatus.OK_200.getStatusCode())));
+    }
+
+    @Test
+    public void givenBookByIdNeededThenShouldReturnBookWithThatId() {
+        Book result = target.path("/books/1").request().get(Book.class);
+        Assert.assertThat(result.getId(), is(equalTo("1")));
     }
 
 }
