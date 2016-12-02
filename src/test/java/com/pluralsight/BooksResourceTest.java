@@ -4,6 +4,7 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.util.HttpStatus;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
+import org.glassfish.jersey.test.TestProperties;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,6 +32,8 @@ public class BooksResourceTest extends JerseyTest {
 
     @Override
     protected Application configure() {
+        enable(TestProperties.LOG_TRAFFIC);
+        enable(TestProperties.DUMP_ENTITY);
         return new ResourceConfig().packages("com.pluralsight");
     }
 
